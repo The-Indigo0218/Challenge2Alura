@@ -3,17 +3,17 @@ package Models;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Conversion {
+public class ConversionCore {
     private String fromCode;
     private String toCode;
     private BigDecimal rate;
-    private LocalDate lastDate;
+    private String lastDate;
 
-    public Conversion(ConversionDTO dto) {
+    public ConversionCore(ConversionExchangerate dto) {
         this.fromCode = dto.base_code();
         this.toCode = dto.target_code();
-        this.rate = BigDecimal.valueOf(Long.parseLong(dto.conversion_rate()));
-        this.lastDate = LocalDate.parse(dto.time_last_update_utc());
+        this.rate = BigDecimal.valueOf(Long.parseLong(dto.conversion_result()));
+        this.lastDate = dto.time_last_update_utc();
     }
 
     public void setFromCode(String fromCode) {
@@ -28,13 +28,13 @@ public class Conversion {
         this.rate = rate;
     }
 
-    public void setLastDate(LocalDate lastDate) {
+    public void setLastDate(String lastDate) {
         this.lastDate = lastDate;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Conversion{");
+        final StringBuilder sb = new StringBuilder("ConversionCore{");
         sb.append("fromCode= '").append(fromCode).append('\'');
         sb.append(", toCode= '").append(toCode).append('\'');
         sb.append(", rate= ").append(rate);
